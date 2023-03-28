@@ -43,7 +43,14 @@ frankenrockt = sf::st_as_sf(x = tst_dat, coords = c("x", "y"), crs = st_crs(4326
 mv = mapview(x = frankenrockt, label = frankenrockt$name)
 ```
 
+frankenrockt
+================================================================================
+
 ```{r map, include=TRUE}
 mv
 ```
+
+mitrocken
+================================================================================
+Rockt mit! Alle Bands eintragen! So geht's: [schau her](https://github.com/przell/frankenrockt).
 
