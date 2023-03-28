@@ -1,6 +1,10 @@
 # frankenrockt
 Musik auf die Karte. Karte für fränkische Rockbands von heute, gestern und morgen.
 
+## Check it out now
+
+minimales beispiel: [frankenrockt](https://przell.github.io/frankenrockt/)
+
 ## Mission
 Tragt euch ein wenn ihr Rocker seid. Egal ob von heute, gestern oder morgen. Das ist eine Landrockkarte von Musikern für Musiker. Auch ausserhalb Frankens könnt Ihr euch eintragen, aber der Fokus ist und bleibt Franken - ["Deutschlands beste Gitarrenmusik kommt nun mal aus der Provinz"](https://www.br.de/radio/bayern2/sendungen/podcasts/fraenkische-garagenbands-aus-den-spaeten-achtzigern-102.html "BR2 Nachtmix - Fränkische Garagenrockbands auf den späten 80ern")
 
