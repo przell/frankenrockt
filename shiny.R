@@ -34,24 +34,21 @@ mv = mapview(x = frankenrockt, label = frankenrockt$name)
 
 # ui ---------------------------------------------------------------------------
 ui <- fluidPage(
-  leafletOutput("map"),
-  p(),
-  actionButton("recalc", "New points")
+  leafletOutput('map')
 )
+
 
 # server -----------------------------------------------------------------------
 server <- function(input, output, session) {
-  output$map = renderLeaflet({leaflet() %>% 
-      addTiles() %>% 
-      addMarkers(lng = tst_dat$x, lat = tst_dat$y) %>% 
-      addPopups(lng = tst_dat$x, lat = tst_dat$y)}) # renderLeaflet(mv) doesn't work :(
+  output$map <- renderLeaflet({leaflet()%>%addTiles()})
   
   observe({
     click = input$map_click
-    leafletProxy('map') %>% addMarkers(lng = click$lng, lat = click$lat)
+    leafletProxy('map')%>%addMarkers(lng = click$lng, lat = click$lat)
   }) %>%
     bindEvent(input$map_click)
 }
+
 
 # deploy -----------------------------------------------------------------------
 shinyApp(ui, server)
