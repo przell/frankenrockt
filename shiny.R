@@ -28,6 +28,7 @@
 library(shiny)
 library(leaflet)
 library(sf)
+library(mapview)
 
 # available data ---------------------------------------------------------------
 tst_dat1 = data.frame(name = "Swedish Curtains", 
@@ -50,6 +51,37 @@ bands = rbind(tst_dat1, tst_dat2)
 bands_sf = sf::st_as_sf(x = bands, coords = c("x", "y"), crs = st_crs(4326))
 mv = mapview(x = bands_sf, label = bands_sf$name)
 
+modal_add_band <- function(name,
+                           motto,
+                           genre,
+                           from,
+                           to,
+                           song,
+                           x, y) {
+  modalDialog(
+  textInput(inputId = "name", label = "name",
+            placeholder = "Mei geile Band", value = name),
+  textInput(inputId = "motto", label = "motto",
+            placeholder = "Rock mer a weng, alter?", value = motto), 
+  textInput(inputId = "genre", label = "genre",
+            placeholder = "Hard Rock", value = genre),
+  textInput(inputId = "from", label = "from",
+            placeholder = "1984", value = from),
+  textInput(inputId = "to", label = "to",
+            placeholder = "2023", value = to),
+  actionButton("loc", "Ort auf Karte wählen..."),
+  textInput(inputId = "x", label = "longitude", value = x),
+  textInput(inputId = "y", label = "latitude", value = y),
+  textInput(inputId = "song", label = "song",
+            placeholder = "copy link here", value = song),
+  title = "Band platzieren:",
+  footer = tagList(
+    actionButton("cancel", "Cancel"),
+    actionButton("ok", "Ok")
+  )
+)
+}
+
 # ui ---------------------------------------------------------------------------
 ui <- fluidPage(
   # Application title
@@ -58,13 +90,7 @@ ui <- fluidPage(
   # UI Inputs
   sidebarLayout(
     sidebarPanel(
-      textInput(inputId = "name", label = "name", placeholder = "Mei geile Band"),
-      textInput(inputId = "motto", label = "motto", placeholder = "Rock mer a weng, alter?"), 
-      textInput(inputId = "genre", label = "genre", placeholder = "Hard Rock"),
-      textInput(inputId = "from", label = "from", placeholder = "1984"),
-      textInput(inputId = "to", label = "to", placeholder = "2023"),
-      textInput(inputId = "song", label = "song", placeholder = "copy link here"),
-      actionButton("band_describe", "Band platzieren!")
+      actionButton("add_band", "Band platzieren")
     ),
     
     # UI Outputs
@@ -78,6 +104,23 @@ ui <- fluidPage(
   )
 )
 
+select_location <- FALSE
+name <- ""
+motto <- ""
+genre <- ""
+from <- ""
+to <- ""
+song <- ""
+
+reset_values <- function() {
+  select_location <<- FALSE
+  name <<- ""
+  motto <<- ""
+  genre <<- ""
+  from <<- ""
+  to <<- ""
+  song <<- ""
+}
 
 # server -----------------------------------------------------------------------
 server <- function(input, output, session) {
@@ -87,6 +130,40 @@ server <- function(input, output, session) {
   
   # plot the table as is
   output$table = renderDataTable(bands)
+  
+  observeEvent(input$add_band, {
+    showModal(modal_add_band(name = name,
+                             motto = motto,
+                             genre = genre,
+                             from = from,
+                             to = to,
+                             song = song,
+                             x = click_location$location$lng,
+                             y = click_location$location$lat))
+  })
+  
+  observeEvent(input$loc, {
+    showNotification("Ort auf Karte wählen...")
+    select_location <<- TRUE
+    name <<- input$name
+    motto <<- input$motto
+    genre <<- input$genre
+    from <<- input$from
+    to <<- input$to
+    song <<- input$song
+    removeModal()
+  })
+  
+  observeEvent(input$ok, {
+    showNotification("Band platziert!")
+    removeModal()
+    reset_values()
+  })
+  
+  observeEvent(input$cancel, {
+    removeModal()
+    reset_values()
+  })
   
   # observe({
   #   click = input$map_click
@@ -98,12 +175,21 @@ server <- function(input, output, session) {
 
   observeEvent(input$map_click, {
     click_location$location = input$map_click
-    leafletProxy('map') %>% addCircleMarkers(lng = click_location$location$lng, 
-                                             lat = click_location$location$lat)
+    if (select_location) {
+      select_location <<- FALSE
+      showModal(modal_add_band(name = name,
+                               motto = motto,
+                               genre = genre,
+                               from = from,
+                               to = to,
+                               song = song,
+                               x = click_location$location$lng,
+                               y = click_location$location$lat))
+    }
     })
   
   #When "Save" is pressed should append data to df and export
-  observeEvent(input$band_describe, {
+  observeEvent(input$ok, {
     band_new <- data.frame(name = input$name, 
                            motto = input$motto, 
                            genre = input$genre, 
