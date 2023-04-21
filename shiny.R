@@ -217,7 +217,14 @@ server <- function(input, output, session) {
     ReactiveDf()
   })
   
-  
+  # Recreate map
+  # It doesn't work like that...
+  # Probably leafletproxy is needed
+  # https://stackoverflow.com/questions/45194038/shiny-r-issue-on-updating-leaflet-map-inside-the-app
+  # https://stackoverflow.com/questions/46979328/how-to-make-shiny-leaflet-map-reac-to-change-in-input-value-r
+  bands_sf = sf::st_as_sf(x = bands, coords = c("x", "y"), crs = st_crs(4326))
+  mv = mapview(x = bands_sf, label = bands_sf$name)
+  output$map = renderLeaflet({ mv@map })
   
 }
 
