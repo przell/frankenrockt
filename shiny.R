@@ -37,16 +37,16 @@ library(mapview)
 #                       from = 2006, 
 #                       to = 2020, 
 #                       song = paste0("can't stop: <a href=", "https://www.youtube.com/watch?v=j37Ii20Ddo4",">", "https://www.youtube.com/watch?v=j37Ii20Ddo4", "</a>"), 
-#                       x = 10.59689555556497, 
-#                       y = 49.63753461701194)
+#                       x = 10.5968, 
+#                       y = 49.6375)
 # tst_dat2 = data.frame(name = "Die Verstimmten Klimexperten", 
 #                       motto = "Four from the future.", 
 #                       genre = "Hard Rock", 
 #                       from = 2004, 
 #                       to = 2010, 
 #                       song = "not online", 
-#                       x = 10.621313357566068, 
-#                       y = 49.58177091487892)
+#                       x = 10.62131, 
+#                       y = 49.58177)
 # bands = rbind(tst_dat1, tst_dat2)
 
 bands = read.csv(file = "shiny_bands.csv")
@@ -67,8 +67,10 @@ modal_add_band <- function(name,
             placeholder = "Mei geile Band", value = name),
   textInput(inputId = "motto", label = "motto",
             placeholder = "Rock mer a weng, alter?", value = motto), 
-  textInput(inputId = "genre", label = "genre",
-            placeholder = "Hard Rock", value = genre),
+  # textInput(inputId = "genre", label = "genre",
+  #           placeholder = "Hard Rock", value = genre),
+  selectInput(inputId = "genre", label = "genre", 
+              choices = c("Hard Rock", "Metal", "Punk", "Indie", "Kein Rock")),
   textInput(inputId = "from", label = "from",
             placeholder = "1984", value = from),
   textInput(inputId = "to", label = "to",
@@ -214,6 +216,9 @@ server <- function(input, output, session) {
   output$table <- renderDataTable({
     ReactiveDf()
   })
+  
+  
+  
 }
 
 
