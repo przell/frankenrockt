@@ -31,23 +31,27 @@ library(sf)
 library(mapview)
 
 # available data ---------------------------------------------------------------
-tst_dat1 = data.frame(name = "Swedish Curtains", 
-                      motto = "Hardrockband from Münchsteinach fighting to hold the rythm", 
-                      genre = "Hard Rock", 
-                      from = 2006, 
-                      to = 2020, 
-                      song = paste0("can't stop: <a href=", "https://www.youtube.com/watch?v=j37Ii20Ddo4",">", "https://www.youtube.com/watch?v=j37Ii20Ddo4", "</a>"), 
-                      x = 10.59689555556497, 
-                      y = 49.63753461701194)
-tst_dat2 = data.frame(name = "Die Verstimmten Klimexperten", 
-                      motto = "Four from the future.", 
-                      genre = "Hard Rock", 
-                      from = 2004, 
-                      to = 2010, 
-                      song = "not online", 
-                      x = 10.621313357566068, 
-                      y = 49.58177091487892)
-bands = rbind(tst_dat1, tst_dat2)
+# tst_dat1 = data.frame(name = "Swedish Curtains", 
+#                       motto = "Hardrockband from Münchsteinach fighting to hold the rythm", 
+#                       genre = "Hard Rock", 
+#                       from = 2006, 
+#                       to = 2020, 
+#                       song = paste0("can't stop: <a href=", "https://www.youtube.com/watch?v=j37Ii20Ddo4",">", "https://www.youtube.com/watch?v=j37Ii20Ddo4", "</a>"), 
+#                       x = 10.59689555556497, 
+#                       y = 49.63753461701194)
+# tst_dat2 = data.frame(name = "Die Verstimmten Klimexperten", 
+#                       motto = "Four from the future.", 
+#                       genre = "Hard Rock", 
+#                       from = 2004, 
+#                       to = 2010, 
+#                       song = "not online", 
+#                       x = 10.621313357566068, 
+#                       y = 49.58177091487892)
+# bands = rbind(tst_dat1, tst_dat2)
+
+bands = read.csv(file = "shiny_bands.csv")
+bands$x = round(x = bands$x, digits = 5)
+bands$y = round(x = bands$y, digits = 5)
 bands_sf = sf::st_as_sf(x = bands, coords = c("x", "y"), crs = st_crs(4326))
 mv = mapview(x = bands_sf, label = bands_sf$name)
 
@@ -196,8 +200,8 @@ server <- function(input, output, session) {
                            from = input$from, 
                            to = input$to, 
                            song = input$song, 
-                           x = click_location$location$lng,
-                           y = click_location$location$lat)
+                           x = round(click_location$location$lng, 5),
+                           y = round(click_location$location$lat, 5))
     bands <- rbind(bands, band_new)
     ReactiveDf(bands) # set reactiveVal's value.
     write.csv(bands, "shiny_bands.csv") #This export works but the date is saved incorrectly as "17729" not sure why
