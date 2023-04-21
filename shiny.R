@@ -204,7 +204,7 @@ server <- function(input, output, session) {
                            y = round(click_location$location$lat, 5))
     bands <- rbind(bands, band_new)
     ReactiveDf(bands) # set reactiveVal's value.
-    write.csv(bands, "shiny_bands.csv") #This export works but the date is saved incorrectly as "17729" not sure why
+    write.csv(x = bands, file = "shiny_bands.csv", row.names = FALSE) #This export works but the date is saved incorrectly as "17729" not sure why
   })
   
   # Create a reactive dataset to allow for easy updating
