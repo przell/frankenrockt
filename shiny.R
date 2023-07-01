@@ -29,6 +29,8 @@ library(shiny)
 library(leaflet)
 library(sf)
 library(mapview)
+library(httr2)
+library(jsonlite)
 
 # available data ---------------------------------------------------------------
 # tst_dat1 = data.frame(name = "Swedish Curtains", 
@@ -52,14 +54,21 @@ library(mapview)
 # read -------------------------------------------------------------------------
 
 # from github csv.
-bands = read.csv(file = "shiny_bands.csv")
+# bands = read.csv(file = "shiny_bands.csv")
+# get request to api
+# CSV endpoint: https://torskar.olegsson.xyz/frankenrockt/bands.csv
+# get https://torskar.olegsson.xyz/frankenrockt/bands.csv
+req = httr2::request("https://torskar.olegsson.xyz/frankenrockt/bands.csv")
+resp <- req_perform(req)
+resp <- httr2::resp_body_string(resp)
+bands = read.table(header = T, text = resp, sep = ",")
+
+# formatting
 bands$x = round(x = bands$x, digits = 5)
 bands$y = round(x = bands$y, digits = 5)
 bands_sf = sf::st_as_sf(x = bands, coords = c("x", "y"), crs = st_crs(4326))
 
-# get request to api
-# CSV endpoint: https://torskar.olegsson.xyz/frankenrockt/bands.csv
-get https://torskar.olegsson.xyz/frankenrockt/bands.csv
+
 
 # build map --------------------------------------------------------------------
 mv = mapview(x = bands_sf, label = bands_sf$name)
@@ -218,12 +227,17 @@ server <- function(input, output, session) {
     ReactiveDf(bands) # set reactiveVal's value.
     
     # write to github csv table
-    write.csv(x = bands, file = "shiny_bands.csv", row.names = FALSE) #This export works but the date is saved incorrectly as "17729" not sure why
+    # write.csv(x = bands, file = "shiny_bands.csv", row.names = FALSE) #This export works but the date is saved incorrectly as "17729" not sure why
     
     # post request to api to save on server
     # submit endpoint: https://torskar.olegsson.xyz/frankenrockt/submit
     # post request body json, one band at a time
-    post https://torskar.olegsson.xyz/frankenrockt/submit
+    # post https://torskar.olegsson.xyz/frankenrockt/submit
+    
+    post_band = httr2::request("https://torskar.olegsson.xyz/frankenrockt/submit")  %>%
+      req_body_json(c(band_new), auto_unbox = TRUE)
+    req_perform(post_band)
+    
   })
   
   # Create a reactive dataset to allow for easy updating
