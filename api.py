@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, make_response
 from pathlib import Path
 
 
@@ -16,13 +16,20 @@ FIELDS = (
 
 app = Flask(__name__)
 
+def _make_csv_response():
+    with open(CSV_PATH) as src:
+        resp = src.read()
+    resp = make_response(resp)
+    resp.mimetype = 'text/plain'
+    return resp
+
+
 @app.route(
     '/bands.csv',
     methods=['GET'],
 )
 def get_bands_csv():
-    with open(CSV_PATH) as src:
-        return src.read()
+    return _make_csv_response()
 
 @app.route(
     '/submit',
@@ -36,8 +43,7 @@ def ingest_band():
     ))
     with open(CSV_PATH, 'a') as dst:
         dst.write(csv_line+'\n')
-    with open(CSV_PATH) as src:
-        return src.read()
+    return _make_csv_response()
 
 if __name__ == '__main__':
     app.run()
