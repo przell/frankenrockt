@@ -49,12 +49,17 @@ library(mapview)
 #                       y = 49.58177)
 # bands = rbind(tst_dat1, tst_dat2)
 
+# read -------------------------------------------------------------------------
+# get request to api
 bands = read.csv(file = "shiny_bands.csv")
 bands$x = round(x = bands$x, digits = 5)
 bands$y = round(x = bands$y, digits = 5)
 bands_sf = sf::st_as_sf(x = bands, coords = c("x", "y"), crs = st_crs(4326))
+
+# build map --------------------------------------------------------------------
 mv = mapview(x = bands_sf, label = bands_sf$name)
 
+# function add band ------------------------------------------------------------
 modal_add_band <- function(name,
                            motto,
                            genre,
@@ -194,7 +199,7 @@ server <- function(input, output, session) {
     }
     })
   
-  #When "Save" is pressed should append data to df and export
+  # When "Save" is pressed should append data to df and export
   observeEvent(input$ok, {
     band_new <- data.frame(name = input$name, 
                            motto = input$motto, 
@@ -206,6 +211,7 @@ server <- function(input, output, session) {
                            y = round(click_location$location$lat, 5))
     bands <- rbind(bands, band_new)
     ReactiveDf(bands) # set reactiveVal's value.
+    # post request to api to save on server
     write.csv(x = bands, file = "shiny_bands.csv", row.names = FALSE) #This export works but the date is saved incorrectly as "17729" not sure why
   })
   
@@ -218,7 +224,8 @@ server <- function(input, output, session) {
   })
   
   # Recreate map
-  # It doesn't work like that...
+  # Mapview doesn't recreate the map interactively. The band does not appear on the map after adding it.
+  # It appears in the table directly.
   # Probably leafletproxy is needed
   # https://stackoverflow.com/questions/45194038/shiny-r-issue-on-updating-leaflet-map-inside-the-app
   # https://stackoverflow.com/questions/46979328/how-to-make-shiny-leaflet-map-reac-to-change-in-input-value-r
