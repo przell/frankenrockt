@@ -50,11 +50,16 @@ library(mapview)
 # bands = rbind(tst_dat1, tst_dat2)
 
 # read -------------------------------------------------------------------------
-# get request to api
+
+# from github csv.
 bands = read.csv(file = "shiny_bands.csv")
 bands$x = round(x = bands$x, digits = 5)
 bands$y = round(x = bands$y, digits = 5)
 bands_sf = sf::st_as_sf(x = bands, coords = c("x", "y"), crs = st_crs(4326))
+
+# get request to api
+# CSV endpoint: https://torskar.olegsson.xyz/frankenrockt/bands.csv
+get https://torskar.olegsson.xyz/frankenrockt/bands.csv
 
 # build map --------------------------------------------------------------------
 mv = mapview(x = bands_sf, label = bands_sf$name)
@@ -211,8 +216,14 @@ server <- function(input, output, session) {
                            y = round(click_location$location$lat, 5))
     bands <- rbind(bands, band_new)
     ReactiveDf(bands) # set reactiveVal's value.
-    # post request to api to save on server
+    
+    # write to github csv table
     write.csv(x = bands, file = "shiny_bands.csv", row.names = FALSE) #This export works but the date is saved incorrectly as "17729" not sure why
+    
+    # post request to api to save on server
+    # submit endpoint: https://torskar.olegsson.xyz/frankenrockt/submit
+    # post request body json, one band at a time
+    post https://torskar.olegsson.xyz/frankenrockt/submit
   })
   
   # Create a reactive dataset to allow for easy updating
