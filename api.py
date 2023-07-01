@@ -23,7 +23,6 @@ def _make_csv_response():
     resp.mimetype = 'text/plain'
     return resp
 
-
 @app.route(
     '/bands.csv',
     methods=['GET'],
@@ -38,7 +37,7 @@ def get_bands_csv():
 def ingest_band():
     data = request.json
     csv_line = ','.join((
-        data[f]
+        str(data[f])
         for f in FIELDS
     ))
     with open(CSV_PATH, 'a') as dst:
