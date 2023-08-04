@@ -1,5 +1,5 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # frankenrockt
@@ -47,6 +47,7 @@ But the focus has been, is and will be Franconia - ["Deutschlands beste Gitarren
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://www.bolzanor.eu/"><img src="https://avatars.githubusercontent.com/u/51962348?v=4?s=100" width="100px;" alt="przell"/><br /><sub><b>przell</b></sub></a><br /><a href="#maintenance-przell" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Dancelknight"><img src="https://avatars.githubusercontent.com/u/32516208?v=4?s=100" width="100px;" alt="Dancelknight"/><br /><sub><b>Dancelknight</b></sub></a><br /><a href="#content-Dancelknight" title="Content">🖋</a></td>
     </tr>
   </tbody>
 </table>
