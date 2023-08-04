@@ -47,7 +47,11 @@ But the focus has been, is and will be Franconia - ["Deutschlands beste Gitarren
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://www.bolzanor.eu/"><img src="https://avatars.githubusercontent.com/u/51962348?v=4?s=100" width="100px;" alt="przell"/><br /><sub><b>przell</b></sub></a><br /><a href="#maintenance-przell" title="Maintenance">🚧</a></td>
+
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Dancelknight"><img src="https://avatars.githubusercontent.com/u/32516208?v=4?s=100" width="100px;" alt="Dancelknight"/><br /><sub><b>Dancelknight</b></sub></a><br /><a href="#content-Dancelknight" title="Content">🖋</a></td>
+
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/olegsson"><img src="https://avatars.githubusercontent.com/u/27994703?v=4?s=100" width="100px;" alt="olegsson"/><br /><sub><b>olegsson</b></sub></a><br /><a href="https://github.com/przell/frankenrockt/commits?author=olegsson" title="Code">💻</a></td>
+
     </tr>
   </tbody>
 </table>
