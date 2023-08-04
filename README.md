@@ -34,6 +34,15 @@ But the focus has been, is and will be Franconia - ["Deutschlands beste Gitarren
 ### Build
 - Host the shiny app via github actions
 
+## Contributors
 
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 
