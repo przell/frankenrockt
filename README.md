@@ -1,3 +1,5 @@
+[![All Contributors](https://img.shields.io/github/all-contributors/przell/frankenrockt?color=ee8449&style=flat-square)](#contributors)
+
 # frankenrockt
 Music to the map. Map of rockbands of today, yesterday and tomorrow.
 
