@@ -1,4 +1,7 @@
 [![All Contributors](https://img.shields.io/github/all-contributors/przell/frankenrockt?color=ee8449&style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 # frankenrockt
 Music to the map. Map of rockbands of today, yesterday and tomorrow.
@@ -39,6 +42,20 @@ But the focus has been, is and will be Franconia - ["Deutschlands beste Gitarren
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.bolzanor.eu/"><img src="https://avatars.githubusercontent.com/u/51962348?v=4?s=100" width="100px;" alt="przell"/><br /><sub><b>przell</b></sub></a><br /><a href="#maintenance-przell" title="Maintenance">🚧</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
