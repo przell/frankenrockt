@@ -15,6 +15,15 @@
       "contributions": [
         "maintenance"
       ]
+    },
+    {
+      "login": "vlntnburger",
+      "name": "vlntnburger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/130749834?v=4",
+      "profile": "https://github.com/vlntnburger",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
