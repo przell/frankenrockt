@@ -17,6 +17,15 @@
       ]
     },
     {
+      "login": "vlntnburger",
+      "name": "vlntnburger",
+      "avatar_url": "https://avatars.githubusercontent.com/u/130749834?v=4",
+      "profile": "https://github.com/vlntnburger",
+      "contributions": [
+      "code"
+      ] 
+   }, 
+   {  
       "login": "Dancelknight",
       "name": "Dancelknight",
       "avatar_url": "https://avatars.githubusercontent.com/u/32516208?v=4",
@@ -25,7 +34,7 @@
         "content"
         ]
     },
-
+    {
       "login": "olegsson",
       "name": "olegsson",
       "avatar_url": "https://avatars.githubusercontent.com/u/27994703?v=4",
